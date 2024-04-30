@@ -33,9 +33,11 @@ st.image(image, width=150)
 
 # App title and introduction
 st.title("Lyzr Neurology Consultant")
-st.markdown("### Welcome to the Lyzr Neurology Consultant!")
+st.markdown("This app uses lyzr automata to generate Medical note.")
+st.sidebar.markdown("## Welcome to the Lyzr Neurology Consultant!")
+st.sidebar.markdown("This app uses lyzr automata to generate medical note. User give a transcript of the doctor-patient encounter and based on conversation It generates Medical.")
 
-query=st.text_area("Enter your conversation: ")
+query=st.sidebar.text_area("Enter your conversation: ")
 
 open_ai_text_completion_model = OpenAIModel(
     api_key=api,
@@ -74,7 +76,19 @@ def neurology_consult(query):
     return answer
 
 
-if st.button("Consult"):
+if st.sidebar.button("Consult"):
     solution = neurology_consult(query)
     st.markdown(solution)
+
+with st.sidebar.expander("ℹ️ - About this App"):
+    st.markdown("""
+    This app uses lyzr automata to generate medical note. User give a transcript of the doctor-patient encounter and based on conversation It generates Medical. For any inquiries or issues, please contact Lyzr.
+
+    """)
+    st.link_button("Lyzr", url='https://www.lyzr.ai/', use_container_width=True)
+    st.link_button("Book a Demo", url='https://www.lyzr.ai/book-demo/', use_container_width=True)
+    st.link_button("Discord", url='https://discord.gg/nm7zSyEFA2', use_container_width=True)
+    st.link_button("Slack",
+                   url='https://join.slack.com/t/genaiforenterprise/shared_invite/zt-2a7fr38f7-_QDOY1W1WSlSiYNAEncLGw',
+                   use_container_width=True)
 
